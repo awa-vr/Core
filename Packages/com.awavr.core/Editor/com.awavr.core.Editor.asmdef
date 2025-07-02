@@ -1,5 +1,6 @@
 {
-    "name": "VRChatPackageTemplate.Editor",
+    "name": "com.awavr.core.Editor",
+    "rootNamespace": "",
     "references": [],
     "includePlatforms": [
         "Editor"

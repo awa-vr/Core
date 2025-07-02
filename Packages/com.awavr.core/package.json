@@ -1,0 +1,17 @@
+{
+  "name": "com.awavr.core",
+  "displayName": "AwA - Core",
+  "version": "1.0.0",
+  "description": "Core for AwA's tools",
+  "gitDependencies": {},
+  "vpmDependencies": {},
+  "author": {
+    "name": "AwA",
+    "email": "N/A",
+    "url": "https://github.com/awa-vr/vrc-tools"
+  },
+  "legacyFolders": {},
+  "legacyFiles": {},
+  "type": "tool",
+  "unity": "2022.3"
+}
