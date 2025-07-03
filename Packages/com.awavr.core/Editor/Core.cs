@@ -37,7 +37,7 @@ namespace AwAVR
 
             EditorGUILayout.Space(10);
             EditorGUILayout.EndVertical();
-            EditorGUILayout.Space(20);
+            EditorGUILayout.Space(10);
         }
 
         /// <summary>
@@ -67,42 +67,12 @@ namespace AwAVR
             return avatars.ToList();
         }
 
-        public static void Cleany(UnityEngine.Object dirtyObject = null)
+        public static void Cleany(Object dirtyObject = null)
         {
             EditorUtility.SetDirty(dirtyObject);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-        }
-
-        public static string SanitizeFloatInput(string input)
-        {
-            if (string.IsNullOrEmpty(input)) return "0";
-            // Only allow digits, one leading minus, and at most one dot
-            bool hasDot = false;
-            bool hasMinus = false;
-            var result = "";
-            for (int i = 0; i < input.Length; i++)
-            {
-                char c = input[i];
-                if (c >= '0' && c <= '9')
-                {
-                    result += c;
-                }
-                else if (c == '.' && !hasDot)
-                {
-                    result += c;
-                    hasDot = true;
-                }
-                else if (c == '-' && i == 0 && !hasMinus)
-                {
-                    result += c;
-                    hasMinus = true;
-                }
-                // Ignore all other characters
-            }
-
-            return result;
         }
 
         public static AnimationClip CreateNewClip(string path, string clipName)
@@ -117,6 +87,50 @@ namespace AwAVR
             AssetDatabase.Refresh();
 
             return newClip;
+        }
+
+        public static AnimatorControllerLayer GetLayerByName(AnimatorController controller, string name)
+        {
+            foreach (var layer in controller.layers)
+            {
+                if (layer.name == $"AwA - {name} - DO NOT TOUCH")
+                    return layer;
+            }
+
+            return null;
+        }
+
+        public static void GetAvatar(ref VRCAvatarDescriptor _avatar, ref List<VRCAvatarDescriptor> _avatars)
+        {
+            EditorGUILayout.BeginHorizontal();
+            _avatar = EditorGUILayout.ObjectField("Avatar", _avatar, typeof(VRCAvatarDescriptor),
+                true) as VRCAvatarDescriptor;
+            if (GUILayout.Button("Refresh", GUILayout.Width(80)))
+            {
+                _avatars = Core.GetAvatarsInScene();
+                if (_avatars.Count == 1)
+                {
+                    _avatar = _avatars.First();
+                    _avatars.Clear();
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            if (_avatars != null)
+            {
+                EditorGUILayout.BeginHorizontal();
+                foreach (var avatar in _avatars)
+                {
+                    if (GUILayout.Button(avatar.name))
+                    {
+                        _avatar = avatar;
+                        _avatars = null;
+                    }
+                }
+
+                GUILayout.EndHorizontal();
+            }
         }
     }
 }

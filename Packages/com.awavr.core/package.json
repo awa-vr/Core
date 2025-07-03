@@ -1,7 +1,7 @@
 {
   "name": "com.awavr.core",
   "displayName": "AwA - Core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Core for AwA's tools",
   "gitDependencies": {},
   "vpmDependencies": {},
