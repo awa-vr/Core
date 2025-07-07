@@ -9,10 +9,15 @@ namespace AwAVR
 {
     public class Core
     {
-        /// <summary>
-        ///     Generates a title header for the editor window.
-        /// </summary>
-        /// <param name="name">Name of the window</param>
+        public enum ExpressionAnimatorType
+        {
+            Base,
+            Additive,
+            Gesture,
+            Action,
+            FX
+        }
+
         public static void Title(string name)
         {
             EditorGUILayout.BeginVertical(GUI.skin.window, GUILayout.Height(25));
@@ -40,23 +45,15 @@ namespace AwAVR
             EditorGUILayout.Space(10);
         }
 
-        /// <summary>
-        ///     Gets the FX controller.
-        /// </summary>
-        /// <param name="avatar">avatar descriptor</param>
-        /// <returns>FX controller</returns>
-        public static AnimatorController GetFXController(VRCAvatarDescriptor avatar)
+        public static AnimatorController GetAnimatorController(VRCAvatarDescriptor avatar,
+            ExpressionAnimatorType type = ExpressionAnimatorType.FX)
         {
-            if (avatar.baseAnimationLayers[4].animatorController != null)
-                return (AnimatorController)avatar.baseAnimationLayers[4].animatorController;
-            else
-                return null;
+            if (avatar.baseAnimationLayers[(int)type].animatorController)
+                return (AnimatorController)avatar.baseAnimationLayers[(int)type].animatorController;
+
+            return null;
         }
 
-        /// <summary>
-        ///     Gets all avatar descriptors in the scene.
-        /// </summary>
-        /// <returns>List of avatar descriptors</returns>
         public static List<VRCAvatarDescriptor> GetAvatarsInScene()
         {
             var avatars = SceneAsset.FindObjectsOfType<VRCAvatarDescriptor>();
