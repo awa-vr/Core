@@ -45,6 +45,11 @@ namespace AwAVR
             EditorGUILayout.Space(10);
         }
 
+        public static AnimatorController GetFXController(VRCAvatarDescriptor avatar)
+        {
+            return GetAnimatorController(avatar);
+        }
+
         public static AnimatorController GetAnimatorController(VRCAvatarDescriptor avatar,
             ExpressionAnimatorType type = ExpressionAnimatorType.FX)
         {
