@@ -77,6 +77,17 @@ namespace AwAVR
             AssetDatabase.Refresh();
         }
 
+        public static void CleanObjects(Object[] dirtyObjects = null)
+        {
+            foreach (var dirtyObject in dirtyObjects)
+            {
+                EditorUtility.SetDirty(dirtyObject);
+            }
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
         public static AnimationClip CreateNewClip(string path, string clipName)
         {
             // Create a new AnimationClip instance
