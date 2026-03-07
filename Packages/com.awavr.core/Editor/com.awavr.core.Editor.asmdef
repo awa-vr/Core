@@ -11,6 +11,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.vrchat.avatars",
+            "expression": "[3.8,4)",
+            "define": "VRCSDK3_AVATARS"
+        }
+    ],
     "noEngineReferences": false
 }

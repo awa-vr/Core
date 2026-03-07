@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if VRCSDK3_AVATARS
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -66,3 +67,4 @@ namespace AwAVR
         }
     }
 }
+#endif

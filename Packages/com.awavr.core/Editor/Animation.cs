@@ -1,7 +1,9 @@
 ﻿using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
+#if VRCSDK3_AVATARS
 using VRC.SDK3.Avatars.Components;
+#endif
 
 namespace AwAVR
 {
@@ -16,6 +18,7 @@ namespace AwAVR
             FX
         }
 
+#if VRCSDK3_AVATARS
         public static AnimatorController GetFXController(VRCAvatarDescriptor avatar)
         {
             return GetAnimatorController(avatar);
@@ -29,6 +32,7 @@ namespace AwAVR
 
             return null;
         }
+#endif
 
         public static AnimationClip CreateNewClip(string path, string clipName)
         {

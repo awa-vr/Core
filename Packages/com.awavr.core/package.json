@@ -1,7 +1,7 @@
 {
   "name": "com.awavr.core",
   "displayName": "AwA - Core",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Core for AwA's tools",
   "gitDependencies": {},
   "vpmDependencies": {},
@@ -13,5 +13,8 @@
   "legacyFolders": {},
   "legacyFiles": {},
   "type": "tool",
-  "unity": "2022.3"
+  "unity": "2022.3",
+  "license": "MIT",
+  "changelogUrl": "https://awa-vr.github.io/vrc-docs/vpm-tools/core/changelog/",
+  "documentationUrl": "https://awa-vr.github.io/vrc-docs/vpm-tools/core/"
 }
