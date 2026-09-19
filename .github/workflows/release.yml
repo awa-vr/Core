@@ -1,7 +1,7 @@
 name: Build Release
 
 # Builds a .zip and .unitypackage for the version in package.json, publishes a
-# GitHub release tagged "v<version>" and then asks the VPM listing to rebuild.
+# GitHub release tagged "<version>" and then asks the VPM listing to rebuild.
 # Runs automatically when package.json changes on main. A version that already
 # has a release tag is skipped, bumping the version is what publishes.
 on:
@@ -11,9 +11,7 @@ on:
     paths: package.json
 
 env:
-  packageName: com.hfcred.animationrepathing
-  packageFileName: animationrepathing
-  packageReleaseName: Animation Repathing
+  packageName: com.awavr.core
 
 permissions:
   contents: write
@@ -34,7 +32,7 @@ jobs:
         id: version
         run: |
           version=$(jq -r .version package.json)
-          tag="v$version"
+          tag="$version"
           if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null; then
             exists=true
             echo "::notice::Release tag $tag already exists, nothing to release."
@@ -60,8 +58,8 @@ jobs:
       - name: Set file names
         run: |
           echo "packagePath=Packages/${packageName}" >> "$GITHUB_ENV"
-          echo "zipFile=${packageFileName}_v${version}.zip" >> "$GITHUB_ENV"
-          echo "unityPackage=${packageFileName}_v${version}.unitypackage" >> "$GITHUB_ENV"
+          echo "zipFile=${packageName}-${version}.zip" >> "$GITHUB_ENV"
+          echo "unityPackage=${packageName}-${version}.unitypackage" >> "$GITHUB_ENV"
 
       # The .unitypackage must contain paths starting with Packages/<name>/ so
       # Unity imports it as a package, so the repo is staged under that folder.
@@ -95,7 +93,7 @@ jobs:
       - name: Make release
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ env.packageReleaseName }} ${{ env.tag }}
+          name: ${{ env.tag }}
           tag_name: ${{ env.tag }}
           generate_release_notes: true
           files: |
