@@ -34,7 +34,8 @@ namespace AwAVR
 
         public static void Cleany(Object dirtyObject = null)
         {
-            EditorUtility.SetDirty(dirtyObject);
+            if (dirtyObject)
+                EditorUtility.SetDirty(dirtyObject);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -42,9 +43,13 @@ namespace AwAVR
 
         public static void CleanObjects(Object[] dirtyObjects = null)
         {
-            foreach (var dirtyObject in dirtyObjects)
+            if (dirtyObjects != null)
             {
-                EditorUtility.SetDirty(dirtyObject);
+                foreach (var dirtyObject in dirtyObjects)
+                {
+                    if (dirtyObject)
+                        EditorUtility.SetDirty(dirtyObject);
+                }
             }
 
             AssetDatabase.SaveAssets();
